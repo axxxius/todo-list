@@ -1,13 +1,19 @@
 import { TextField, Paper, Button } from '@mui/material';
-import { ChangeEvent, useState } from 'react';
+import { ChangeEvent, FC, useState } from 'react';
 import { Add } from '@mui/icons-material';
+import { TTodoList } from '../../App.tsx';
+
+type TPanelProps = {
+  onAddTodo: ({ name, description }: Omit<TTodoList, 'id' | 'checked'>) => void;
+};
 
 const TODO = { name: '', description: '' };
-export const Panel = () => {
+export const Panel: FC<TPanelProps> = ({ onAddTodo }) => {
   const [todo, setTodo] = useState(TODO);
 
   const onClick = () => {
     console.log('@', todo);
+    onAddTodo(todo);
     setTodo(TODO);
   };
 
