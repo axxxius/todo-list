@@ -9,31 +9,32 @@ type TodoListProps = {
   onDeleteTodo: (id: TTodoList['id']) => void;
   onCheckedTodo: (id: TTodoList['id']) => void;
   onEdit: (id: TTodoList['id']) => void;
-  editTodoId: TTodoList['id'];
+  editTodoId: TTodoList['id'] | null;
+  onChangeTodo: ({ name, description }: Omit<TTodoList, 'id' | 'checked'>) => void;
 };
 
-export const TodoList: FC<TodoListProps> = ({ todoList, onDeleteTodo, onCheckedTodo, onEdit ,editTodoId}) => (
+export const TodoList: FC<TodoListProps> = ({
+  editTodoId,
+  todoList,
+  onDeleteTodo,
+  onCheckedTodo,
+  onEdit,
+  onChangeTodo
+}) => (
   <Box>
     {todoList.map((todo) => {
-      if (todo.id === editTodoId) {
-        return (
-          <EditTodoItem
-            key={todo.id}
-            todo={todo}
-            onCheckedTodo={onCheckedTodo}
-            onEdit={onEdit}
-          />
-        )
-      }
-    }
-    return (
-      <TodoItem
-        key={todo.id}
-        todo={todo}
-        onDeleteTodo={onDeleteTodo}
-        onCheckedTodo={onCheckedTodo}
-        onEdit={onEdit}
-      />
-    ))}
+      if (todo.id === editTodoId)
+        return <EditTodoItem key={todo.id} todo={todo} onChangeTodo={onChangeTodo} />;
+
+      return (
+        <TodoItem
+          key={todo.id}
+          todo={todo}
+          onDeleteTodo={onDeleteTodo}
+          onCheckedTodo={onCheckedTodo}
+          onEdit={onEdit}
+        />
+      );
+    })}
   </Box>
 );

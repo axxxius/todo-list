@@ -15,13 +15,13 @@ export const EditTodoItem: FC<EditTodoItemProps> = ({ todo, onChangeTodo }) => {
   });
 
   const onClick = () => {
-    console.log('@', todo);
-    onChangeTodo(todo);
+    console.log('@', editTodo);
+    onChangeTodo(editTodo);
   };
 
   const onChange = (e: ChangeEvent<HTMLInputElement>) => {
     const { value, name } = e.target;
-    setTodo({ ...todo, [name]: value });
+    setEditTodo({ ...editTodo, [name]: value });
   };
 
   return (

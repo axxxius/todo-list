@@ -45,7 +45,18 @@ const App = () => {
     );
   };
 
-  console.log('@', editTodoId);
+  const onChangeTodo = ({ name, description }: Omit<TTodoList, 'id' | 'checked'>) => {
+    setTodoList(
+      todoList.map((todo) => {
+        if (todo.id === editTodoId) {
+          return { ...todo, name, description };
+        }
+
+        return todo;
+      })
+    );
+    setEditTodoId(null);
+  };
 
   return (
     <div className={cl.app}>
@@ -53,11 +64,12 @@ const App = () => {
         <Header />
         <Panel onAddTodo={onAddTodo} />
         <TodoList
+          editTodoId={editTodoId}
           todoList={todoList}
+          onChangeTodo={onChangeTodo}
           onDeleteTodo={onDeleteTodo}
           onCheckedTodo={onCheckedTodo}
           onEdit={onEdit}
-          editTodoId={onEdit}
         />
       </Box>
     </div>
