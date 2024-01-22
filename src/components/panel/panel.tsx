@@ -1,14 +1,11 @@
 import { TextField, Paper, Button } from '@mui/material';
 import { ChangeEvent, FC, useState } from 'react';
 import { Add } from '@mui/icons-material';
-import { TTodoList } from '../../App.tsx';
-
-type TPanelProps = {
-  onAddTodo: ({ name, description }: Omit<TTodoList, 'id' | 'checked'>) => void;
-};
+import { useTodo } from '../../utils';
 
 const TODO = { name: '', description: '' };
-export const Panel: FC<TPanelProps> = ({ onAddTodo }) => {
+export const Panel: FC = () => {
+  const { onAddTodo } = useTodo();
   const [todo, setTodo] = useState(TODO);
 
   const onClick = () => {
@@ -25,7 +22,7 @@ export const Panel: FC<TPanelProps> = ({ onAddTodo }) => {
 
   return (
     <Paper
-      elevation={3}
+      elevation={10}
       sx={{
         width: '100%',
         padding: '25px 30px',
