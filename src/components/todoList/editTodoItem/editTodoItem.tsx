@@ -1,7 +1,7 @@
 import { Button, Paper, TextField } from '@mui/material';
 import { ChangeEvent, FC, useState } from 'react';
-import { TTodoList } from '../../../App.tsx';
 import EditIcon from '@mui/icons-material/Edit';
+import { TTodoList } from '../../../utils';
 
 type EditTodoItemProps = {
   todo: TTodoList;
@@ -26,7 +26,7 @@ export const EditTodoItem: FC<EditTodoItemProps> = ({ todo, onChangeTodo }) => {
 
   return (
     <Paper
-      elevation={3}
+      elevation={10}
       sx={{
         marginTop: '15px',
         width: '100%',
